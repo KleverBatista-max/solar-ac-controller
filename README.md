@@ -4,6 +4,9 @@ Uses surplus solar energy to **pre-cool a room with the air conditioner during t
 
 Pre-cooling is not blind: the controller also reads the **solar forecast** (remaining energy today, expected power now and the next hour) and only pushes the room colder when the forecast says there is enough sun to refill the battery (`Alcanza a cargar hoy`), or the sun is already covering the load.
 
+## "Aire Pro": soft start, one step at a time
+The A/C never jumps straight to its coldest setting. When it is switched on, the controller sends the **26 °C** code, and then goes down stage by stage (25 → 24 → … → 20 °C) as the measured room temperature crosses each threshold, again through IR. That keeps the compressor from a big power spike, which matters when the energy comes from a battery. On the solar side, the SSC controller only lets the stage go lower when the battery is charging with real surplus and the forecast says the day can still refill it; if the battery starts discharging it holds, warns and finally switches off. An Echo Dot announces each stage through Alexa routines. Power is measured by a CT clamp on the A/C (ESP32) and integrated into kWh, so you can chart how much it consumed at each stage. (The air-conditioning side has been switched off since January, so recent data may be empty.)
+
 | Path | What |
 |---|---|
 | `homeassistant/packages/solar_ac_controller.yaml` | The 6 automations (SSC controller, smart temperature, manual override, solar takes control, daily reset, fan sync), the debug sensor, the A/C energy integration and all helpers |
