@@ -19,6 +19,6 @@ The A/C never jumps straight to its coldest setting. When it is switched on, the
 - Broadlink integration and SmartIR (HACS). Adapt entity and device IDs to your setup.
 - Optional: [bluetti-solar-charger](https://github.com/KleverBatista-max/bluetti-solar-charger) for the second consumer of surplus.
 
-Overview: [solar-home-overview](https://github.com/KleverBatista-max/solar-home-overview).
+Full logic: [`docs/how-it-works.md`](docs/how-it-works.md). Overview: [solar-home-overview](https://github.com/KleverBatista-max/solar-home-overview).
 
 Created by **John Batista** ([@KleverBatista-max](https://github.com/KleverBatista-max)). Built with AI assistants (ChatGPT, Claude) as tools. MIT licensed. Secrets are not included; replace `!secret` values and regenerate ESPHome keys.
