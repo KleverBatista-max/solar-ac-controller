@@ -1,0 +1,19 @@
+# Solar A/C controller (Home Assistant)
+
+Uses surplus solar energy to **pre-cool a room with the air conditioner during the day**, so the battery isn't drained at night. The controller (`A/C SSC v5.8.4`, every 3 min) steps the setpoint (26 → 20 °C) by real room temperature and available solar, with manual override, a defensive dawn mode, warning/off streaks if the battery discharges, and hand‑off at sunset. The A/C is driven by infrared codes through a Broadlink RM mini 3.
+
+| Path | What |
+|---|---|
+| `homeassistant/packages/solar_ac_controller.yaml` | The 6 automations (SSC controller, smart temperature, manual override, solar takes control, daily reset, fan sync), the debug sensor, the A/C energy integration and all helpers |
+| `esphome/airconditionermultisensor.yaml` | ESP32 with a CT clamp (A/C power) and a DS18B20 room temperature probe |
+| `broadlink/ir_codes.json` | IR codes learned from the A/C (OFF, 20–26 °C) |
+| `raspberry-original/solar_air_controller.py` | First version in Python on a Raspberry Pi |
+
+## Requires
+- **[solar-inverter-modbus-monitor](https://github.com/KleverBatista-max/solar-inverter-modbus-monitor)** provides the solar/battery sensors and SOC helpers used here (`sensor.solar_total_power`, `sensor.solar_estado_real`, `input_number.soc_minimo`…).
+- Broadlink integration and SmartIR (HACS). Adapt entity and device IDs to your setup.
+- Optional: [bluetti-solar-charger](https://github.com/KleverBatista-max/bluetti-solar-charger) for the second consumer of surplus.
+
+Overview: [solar-home-overview](https://github.com/KleverBatista-max/solar-home-overview).
+
+Created by **John Batista** ([@KleverBatista-max](https://github.com/KleverBatista-max)). Built with AI assistants (ChatGPT, Claude) as tools. MIT licensed. Secrets are not included; replace `!secret` values and regenerate ESPHome keys.
