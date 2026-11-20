@@ -2,6 +2,8 @@
 
 Uses surplus solar energy to **pre-cool a room with the air conditioner during the day**, so the battery isn't drained at night. The controller (`A/C SSC v5.8.4`, every 3 min) steps the setpoint (26 → 20 °C) by real room temperature and available solar, with manual override, a defensive dawn mode, warning/off streaks if the battery discharges, and hand‑off at sunset. The A/C is driven by infrared codes through a Broadlink RM mini 3.
 
+Pre-cooling is not blind: the controller also reads the **solar forecast** (remaining energy today, expected power now and the next hour) and only pushes the room colder when the forecast says there is enough sun to refill the battery (`Alcanza a cargar hoy`), or the sun is already covering the load.
+
 | Path | What |
 |---|---|
 | `homeassistant/packages/solar_ac_controller.yaml` | The 6 automations (SSC controller, smart temperature, manual override, solar takes control, daily reset, fan sync), the debug sensor, the A/C energy integration and all helpers |
