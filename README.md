@@ -14,6 +14,11 @@ The A/C never jumps straight to its coldest setting. When it is switched on, the
 | `broadlink/ir_codes.json` | IR codes learned from the A/C (OFF, 20–26 °C) |
 | `raspberry-original/solar_air_controller.py` | First version in Python on a Raspberry Pi |
 
+## The air-conditioner ESP32 (`esphome/airconditionermultisensor.yaml`)
+- **Current:** a CT clamp on the A/C wire read by the ADC (GPIO34) every 200 ms, smoothed with a 30-sample moving average, calibrated linearly, and anything under 0.2 A is forced to 0 so noise doesn't look like consumption.
+- **Power:** an *estimate*, not a real meter: current × 120 V when it is under 1 A and × 220 V above that (no power factor). Good enough to tell "off / running / working hard", which is what the controller needs (it uses > 5 W as "on" and 700 W as "working hard").
+- **Temperature:** a DS18B20 on the 1-Wire bus (GPIO4), every 15 s.
+
 ## Requires
 - **[solar-inverter-modbus-monitor](https://github.com/KleverBatista-max/solar-inverter-modbus-monitor)** provides the solar/battery sensors and SOC helpers used here (`sensor.solar_total_power`, `sensor.solar_estado_real`, `input_number.soc_minimo`…).
 - Broadlink integration and SmartIR (HACS). Adapt entity and device IDs to your setup.
